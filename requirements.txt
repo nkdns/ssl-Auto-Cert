@@ -1,0 +1,8 @@
+acme==2.7.4
+cryptography==3.2.1
+josepy==1.13.0
+pyOpenSSL==19.1.0
+dnspython==2.3.0
+PyMySQL==1.0.2
+python-dotenv==0.21.0
+requests==2.28.1
