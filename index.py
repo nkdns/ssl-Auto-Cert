@@ -48,6 +48,9 @@ if __name__=='__main__':
             else:
                 _domain = '_acme-challenge.' + _domain
             _docname = ccert.validate_dns_record(_domain,'cname',i['proxydomain'] + f'.{PROXY_DOMAIN}.')
+            if _docname==False:
+                print(f'请先为{_domain}添加值为{i['proxydomain'] + PROXY_DOMAIN}的cname解析')
+                break
 
         if _docname:
             cert = Cert(i['email'],ENVIRONMENT,i['CryptoType'])
