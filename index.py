@@ -53,19 +53,19 @@ if __name__=='__main__':
                 break
 
         if _docname:
-            cert = Cert(i['email'],ENVIRONMENT,i['CryptoType'])
+            cert = Cert(i['email'],ENVIRONMENT,i['cryptoType'])
             cert.new_order(eval(i['domain']))
             challbs = cert.select_dns01_chall()
             cert.perform_dns01(challbs,i['proxydomain'])
 
             if(ENVIRONMENT=='formal'):
-                insert_query = "INSERT INTO certinfo (cert_group_id, domain, createTime, expiredTime, fullchain, certKey, CryptoType) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-                sqlc.IORUnsert(insert_query,(i['id'], i['domain'], cert.cert_start_time, cert.cert_end_time, cert.fullchain_pem, cert.CertKeyPem, i['CryptoType']))
+                insert_query = "INSERT INTO certinfo (certGroupId, domain, createTime, expiredTime, fullchain, certKey, cryptoType) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                sqlc.IORUnsert(insert_query,(i['id'], i['domain'], cert.cert_start_time, cert.cert_end_time, cert.fullchain_pem, cert.CertKeyPem, i['cryptoType']))
                 update_query = "UPDATE certbase SET updateTime = %s ,lastexpiredTime = %s WHERE id = %s"
                 sqlc.IORUnsert(update_query,(datetime.datetime.now(), cert.cert_end_time, i['id']))
             else:
-                insert_query = "INSERT INTO certinfo_test (cert_group_id, domain, createTime, expiredTime, fullchain, certKey, CryptoType) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-                sqlc.IORUnsert(insert_query,(i['id'], i['domain'], cert.cert_start_time, cert.cert_end_time, cert.fullchain_pem, cert.CertKeyPem, i['CryptoType']))
+                insert_query = "INSERT INTO certinfo_test (certGroupId, domain, createTime, expiredTime, fullchain, certKey, cryptoType) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                sqlc.IORUnsert(insert_query,(i['id'], i['domain'], cert.cert_start_time, cert.cert_end_time, cert.fullchain_pem, cert.CertKeyPem, i['cryptoType']))
         else:
             print(f'{_domain}CNAME验证不通过，请检查后再试')
             print('参考值应为：'+i['proxydomain'] + f'.{PROXY_DOMAIN}.\n')

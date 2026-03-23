@@ -79,7 +79,7 @@ def init(HOSTNAME,USER,PASSWORD,DB,port:int=3306):
         'createTime DATETIME',
         'updateTime DATETIME',
         'lastexpiredTime DATETIME',
-        'CryptoType TINYTEXT'
+        'cryptoType TINYTEXT'
     ]
     if _tablestatus:
         _fieldsstatus = sqlc.CheckTableFields('certbase',certbase_fields)
@@ -94,13 +94,13 @@ def init(HOSTNAME,USER,PASSWORD,DB,port:int=3306):
     _tablestatus = sqlc.tablealive('certinfo')
     cert_fields = [
         'id INT(11) AUTO_INCREMENT PRIMARY KEY',
-        'cert_group_id INT(11)',
+        'certGroupId INT(11)',
         'domain VARCHAR(255)',
         'createTime DATETIME',
         'expiredTime DATETIME',
         'fullchain LONGTEXT',
         'certKey LONGTEXT',
-        'CryptoType TINYTEXT'
+        'cryptoType TINYTEXT'
     ]
     if _tablestatus:
         _fieldsstatus = sqlc.CheckTableFields('certinfo',cert_fields)
@@ -115,13 +115,13 @@ def init(HOSTNAME,USER,PASSWORD,DB,port:int=3306):
     _tablestatus = sqlc.tablealive('certinfo_test')
     cert_fields = [
         'id INT(11) AUTO_INCREMENT PRIMARY KEY',
-        'cert_group_id INT(11)',
+        'certGroupId INT(11)',
         'domain VARCHAR(255)',
         'createTime DATETIME',
         'expiredTime DATETIME',
         'fullchain LONGTEXT',
         'certKey LONGTEXT',
-        'CryptoType TINYTEXT'
+        'cryptoType TINYTEXT'
     ]
     if _tablestatus:
         _fieldsstatus = sqlc.CheckTableFields('certinfo_test',cert_fields)
